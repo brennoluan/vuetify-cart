@@ -63,7 +63,7 @@ import axios from 'axios'
 import { useCart } from './composables/useCart'
 import Cart from './components/Cart/Cart.vue'
 import TheHeader from './components/TheHeader.vue'
-const { isOpen, open, add } = useCart()
+const { isOpen, add } = useCart()
 
 const { state: products, isLoading } = useAsyncState(
   axios
