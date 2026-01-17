@@ -1,7 +1,9 @@
 import {ref} from 'vue'
 
+const isOpen = ref(false)
+const cart = ref([])
+
 export const useCart = () => {
-    const isOpen = ref(false)
 
     function open() {
         isOpen.value = true
@@ -11,5 +13,16 @@ export const useCart = () => {
         isOpen.value = false
     }
 
-    return {isOpen, open, close}
+    function add(product) {
+        const index = cart.value.findIndex(item => item.id === product.id)
+        if (index !== -1) {
+            cart.value[index].qty += 1
+            return
+        } else {
+            product.qty = 1
+            cart.value.push(product)
+        }
+    }
+
+    return {isOpen, open, close, add, cart}
 }

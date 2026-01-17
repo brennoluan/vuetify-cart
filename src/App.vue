@@ -211,7 +211,6 @@
 
       <v-main class="mt-6">
         <v-container>
-
           <div v-if="isLoading" class="text-center"><br>
             <v-progress-circular indeterminate size="small" width="3" />
             <br>
@@ -244,7 +243,7 @@
 
                     <div v-if="product.conditions" class="font-weight-light">{{ product.conditions }}</div>
                   </div>
-                  <v-btn flat block color="primary">Adicionar</v-btn>
+                  <v-btn flat block color="primary" @click="add(product)">Adicionar</v-btn>
                 </v-card-text>
               </v-card>
             </v-col>
@@ -264,7 +263,7 @@
 import { useAsyncState } from '@vueuse/core'
 import axios from 'axios'
 import { useCart } from './composables/useCart'
-const { isOpen, open, close } = useCart()
+const { isOpen, open, close, add, cart } = useCart()
 
 const { state: products, isLoading } = useAsyncState(
   axios
