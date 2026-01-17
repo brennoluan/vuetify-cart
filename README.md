@@ -1,79 +1,110 @@
-# Vuetify (Default)
+# Vuetify Cart
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+A modern shopping cart application built with Vue 3, Vuetify 3, and the Composition API.
 
-## ❗️ Important Links
+## Features
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+- Product listing with loading states
+- Add products to cart
+- Remove products from cart
+- Responsive navigation drawer for cart display
+- Empty cart state handling
+- Dark theme interface
+- Asynchronous data fetching with loading indicators
 
-## 💿 Install
+## Tech Stack
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+- **Vue 3** - Progressive JavaScript framework
+- **Vuetify 3** - Material Design component framework
+- **Vite** - Fast build tool and development server
+- **Axios** - HTTP client for API requests
+- **VueUse** - Collection of Vue Composition utilities
+- **Sass** - CSS preprocessor
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+## Prerequisites
 
-After completing the installation, your environment is ready for Vuetify development.
+- Node.js (v18 or higher recommended)
+- npm or yarn
+- Backend API running on `http://localhost:8000/products`
 
-## ✨ Features
+## Installation
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
-
-## 💡 Usage
-
-This section covers how to start the development server and build your project for production.
-
-### Starting the Development Server
-
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+Clone the repository and install dependencies:
 
 ```bash
-yarn dev
+npm install
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## Development
 
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
-
-### Building for Production
-
-To build your project for production, use:
+Start the development server:
 
 ```bash
-yarn build
+npm run dev
 ```
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+## Building for Production
 
-## 💪 Support Vuetify Development
+Create a production build:
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+```bash
+npm run build
+```
 
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
+Preview the production build locally:
 
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
+```bash
+npm run preview
+```
 
-Copyright (c) 2016-present Vuetify, LLC
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── Cart/
+│   │   ├── Cart.vue          # Main cart component
+│   │   ├── CartProducts.vue  # Cart items display
+│   │   └── CartEmpty.vue     # Empty cart state
+│   ├── Product/
+│   │   ├── ProductHome.vue   # Product container with data fetching
+│   │   ├── ProductList.vue   # Product grid display
+│   │   ├── ProductLoading.vue # Loading state
+│   │   └── ProductEmpy.vue   # Empty products state
+│   └── TheHeader.vue         # Application header
+├── composables/
+│   └── useCart.js            # Cart state management
+├── plugins/
+│   ├── index.js              # Plugin registration
+│   └── vuetify.js            # Vuetify configuration
+├── App.vue                   # Root component
+└── main.js                   # Application entry point
+```
+
+## API Requirements
+
+The application expects a backend API endpoint at:
+
+```
+GET http://localhost:8000/products
+```
+
+The API should return an array of product objects with the following structure:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Product Name",
+    "price": 99.99,
+    "image": "image-url",
+    "description": "Product description"
+  }
+]
+```
+
+## License
+
+Private project - not licensed for public use.
