@@ -1,17 +1,17 @@
 <template>
   <v-app theme="dark">
-    <v-navigation-drawer width="500" permanent location="right">
+    <v-navigation-drawer v-model="isOpen" temporary width="500" location="right">
       <div class="d-flex flex-column align-center justify-center h-100">
         <div class="text-center">
           O seu carrinho está vazio. <br>
-          <v-btn color="primary" class="mt-2">Continuar comprando</v-btn>
+          <v-btn color="primary" class="mt-2" @click="close()">Continuar comprando</v-btn>
         </div>
       </div>
       <div class="d-flex flex-column h-100">
         <div class="d-flex align-center justify-space-between pa-4">
           <h3>Carrinho de compras</h3>
 
-          <v-btn icon="mdi-close" />
+          <v-btn icon="mdi-close" @click="close()"/>
         </div>
 
         <div class="h-100 overflow-y-auto">
@@ -188,7 +188,7 @@
 
             <div class="text-center mt-2">
               ou
-              <a href="">Continuar comprando</a>
+              <a href="" @click.stop.prevent="close()">Continuar comprando</a>
             </div>
           </div>
 
@@ -201,9 +201,11 @@
         <v-app-bar-title>Vuetify Cart</v-app-bar-title>
 
         <template #append>
-          <v-badge color="info" dot>
-            <v-icon icon="mdi-cart" />
-          </v-badge>
+          <v-btn @click="open()" icon="mdi-cart">
+            <v-badge color="info" dot>
+              <v-icon icon="mdi-cart" />
+            </v-badge>
+          </v-btn>
         </template>
       </v-app-bar>
 
@@ -470,5 +472,7 @@
 </template>
 
 <script setup>
-//
+import { useCart } from './composables/useCart'
+const { isOpen, open, close } = useCart()
+
 </script>
