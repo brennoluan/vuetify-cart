@@ -9,5 +9,5 @@
 
 <script setup>
 import { useCart } from '../../composables/useCart';
-const { cart, close } = useCart();
+const { close } = useCart();
 </script>

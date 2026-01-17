@@ -20,7 +20,7 @@
                                     <h5 class="font-weight-regular">{{ product.name }}</h5>
 
                                     <div>
-                                        <strong>R$ {{ product.price }}</strong>
+                                        <strong>{{ formatPrice(product.promotion ?? product.price) }}</strong>
                                     </div>
                                 </div>
 
@@ -56,7 +56,7 @@
 
                     <div>
                         <strong>
-                            R$500,00
+                            {{ formatPrice(total) }}
                         </strong>
                     </div>
                 </div>
@@ -74,7 +74,8 @@
 </template>
 
 <script setup>
+import { formatPrice } from '../../helpers/helpers';
 import { useCart } from '../../composables/useCart';
 
-const { cart, close, remove } = useCart();
+const { cart, close, remove, total } = useCart();
 </script>

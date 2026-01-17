@@ -1,7 +1,8 @@
+import { useStorage } from '@vueuse/core'
 import {ref, computed} from 'vue'
 
 const isOpen = ref(false)
-const cart = ref([])
+const cart = useStorage('cart', [])
 
 export const useCart = () => {
 
@@ -31,9 +32,20 @@ export const useCart = () => {
         }
     }
 
+    const total = computed(() => {
+        return cart.value.reduce((total, item) => {
+            const finalPrice = item.promotion ?? item.price
+            return total + (finalPrice * item.qty)
+        }, 0)
+    })
+
+    function inCart(id) {
+        return cart.value.some(item => item.id === id) 
+    } 
+
     const isEmpty = computed(() => {
         return !cart.value.length
     })
 
-    return {isOpen, open, close, add, remove, cart, isEmpty}
+    return {isOpen, open, close, add, remove, cart, isEmpty, total, inCart}
 }
