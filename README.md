@@ -25,7 +25,7 @@ A modern shopping cart application built with Vue 3, Vuetify 3, and the Composit
 
 - Node.js (v18 or higher recommended)
 - npm or yarn
-- Backend API running on `http://localhost:8000/products`
+- JSON Server for mock API
 
 ## Installation
 
@@ -83,26 +83,42 @@ src/
 └── main.js                   # Application entry point
 ```
 
-## API Requirements
+## API Setup
 
-The application expects a backend API endpoint at:
+This application uses **JSON Server** as a mock REST API. The database is stored in the `database.json` file.
 
+### Starting the API Server
+
+Install JSON Server globally (if not already installed):
+
+```bash
+npm install -g json-server
 ```
-GET http://localhost:8000/products
+
+Start the JSON Server:
+
+```bash
+json-server --watch database.json --port 8000
 ```
 
-The API should return an array of product objects with the following structure:
+The API will be available at `http://localhost:8000/products`
+
+### Database Structure
+
+The `database.json` file should contain a products array with the following structure:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Product Name",
-    "price": 99.99,
-    "image": "image-url",
-    "description": "Product description"
-  }
-]
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Product Name",
+      "price": 99.99,
+      "image": "image-url",
+      "description": "Product description"
+    }
+  ]
+}
 ```
 
 ## License
